@@ -18,11 +18,11 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install coveralls pylint
+          pip install coveralls pylint pylint-django
           pip install -r department/requirements.txt
       - name: Analysing the code with pylint
         run: |
-          pylint department --rcfile .pylintrc
+          pylint --load-plugins=pylint_django --django-settings-module=department.settings department/department_app/
       - name: Coveralls
         run: |
           coverage run --source=department department/manage.py test department_app
