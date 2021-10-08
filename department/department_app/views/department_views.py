@@ -1,7 +1,7 @@
 """Views department"""
 from rest_framework import generics
-from ..rest.serializers import DepartmentListSerializer
-from ..models import Department
+from department_app.rest.serializers import DepartmentListSerializer
+from department_app.models import Department
 
 
 class DepartmentCreateView(generics.CreateAPIView):

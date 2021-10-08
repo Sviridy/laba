@@ -6,7 +6,6 @@ from department_app.models import Department, Positions, Specialization
 # from .positions import Positions
 
 
-
 class Employee(models.Model):
     """Employeee"""
     name = models.CharField(max_length=45)

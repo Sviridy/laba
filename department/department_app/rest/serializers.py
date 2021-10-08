@@ -1,6 +1,6 @@
 """Serializers"""
 from rest_framework import serializers
-from ..models import Department, Employee, Specialization, Positions
+from department_app.models import Department, Employee, Specialization, Positions
 
 
 class DepartmentListSerializer(serializers.ModelSerializer):

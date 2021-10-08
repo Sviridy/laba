@@ -1,7 +1,7 @@
 """Views employee"""
 from rest_framework import generics
-from ..rest.serializers import EmployeeListSerializer
-from ..models import Employee
+from department_app.rest.serializers import EmployeeListSerializer
+from department_app.models import Employee
 
 
 class EmployeeCreateView(generics.CreateAPIView):

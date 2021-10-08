@@ -1,1 +1,2 @@
-# from .test_modul import CountTestCases
+"""Init tests"""
+from department_app.tests.test_modul import TestModels

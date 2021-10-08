@@ -1,6 +1,6 @@
 """Urls"""
 from django.urls import path
-from ..views import DepartmentCreateView, DepartmentDetailView, DepartmentListView, EmployeeDetailView, \
+from department_app.views import DepartmentCreateView, DepartmentDetailView, DepartmentListView, EmployeeDetailView, \
     EmployeeCreateView, EmployeeListView, PositionsDetailView, PositionsCreateView, PositionsListView, \
     SpecializationDetailView, SpecializationCreateView, SpecializationListView
 

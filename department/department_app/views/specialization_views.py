@@ -1,7 +1,7 @@
 """Views specialization"""
 from rest_framework import generics
-from ..rest.serializers import SpecializationListSerializer
-from ..models import Specialization
+from department_app.rest.serializers import SpecializationListSerializer
+from department_app.models import Specialization
 
 
 class SpecializationCreateView(generics.CreateAPIView):
