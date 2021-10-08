@@ -78,7 +78,7 @@ DATABASES = {
         'NAME': 'django',
         'USER': 'root',
         'PASSWORD': 'john591998',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
     }
