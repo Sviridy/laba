@@ -78,7 +78,10 @@ DATABASES = {
         'NAME': 'django',
         'USER': 'root',
         'PASSWORD': 'john591998',
-        'HOST': '127.0.0.1',
+        'HOST': 'localhost',
+        'OPTIONS': {
+            'read_default_file': '/opt/lampp/etc/my.cnf',
+        }
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
     }
