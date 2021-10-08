@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-y3$@bf^j$7#ce$7hg$s%a%3(^*69f4b)^fzm$u6!&r2fk@!tjt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -79,9 +79,6 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'john591998',
         'HOST': 'localhost',
-        'OPTIONS': {
-            'read_default_file': '/opt/lampp/etc/my.cnf',
-        }
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
     }
