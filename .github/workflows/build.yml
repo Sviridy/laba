@@ -10,6 +10,11 @@ jobs:
     strategy:
           matrix:
             python-version: [3.6, 3.7, 3.8, 3.9]
+    env:
+      DB_DATABASE: test_db
+      DB_USER: root
+      DB_PASSWORD: root
+
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
@@ -22,10 +27,15 @@ jobs:
           pip install coveralls pylint pylint-django
           pip install -r department/requirements.txt
       - name: Set up MySQL
-        uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql user: 'developer'
-          mysql password: 'root'
+        run: |
+          sudo /etc/init.d/mysql start
+          mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+#      - name: Set up MySQL
+#        uses: mirromutth/mysql-action@v1.1
+#        with:
+#          mysql user: 'developer'
+#          mysql password: 'root'
+      
       - name: Analysing the code with pylint
         run: |
           pylint --load-plugins=pylint_django --django-settings-module=department.settings department/department_app/
