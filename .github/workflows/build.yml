@@ -23,6 +23,10 @@ jobs:
           pip install -r department/requirements.txt
       - name: Set up MySQL
         uses: mirromutth/mysql-action@v1.1
+        with:
+          mysql root password: ${{ secrets.RootPassword }}
+          mysql user: 'developer'
+          mysql password: ${{ secrets.DatabasePassword }}
       - name: Analysing the code with pylint
         run: |
           pylint --load-plugins=pylint_django --django-settings-module=department.settings department/department_app/
