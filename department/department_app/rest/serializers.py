@@ -5,6 +5,7 @@ from department_app.models import Department, Employee, Specialization, Position
 
 class DepartmentListSerializer(serializers.ModelSerializer):
     """Serializers department"""
+
     class Meta:
         """All fields department"""
         model = Department
@@ -13,6 +14,7 @@ class DepartmentListSerializer(serializers.ModelSerializer):
 
 class EmployeeListSerializer(serializers.ModelSerializer):
     """Serializers employee"""
+
     class Meta:
         """All fields employee"""
         model = Employee
@@ -21,6 +23,7 @@ class EmployeeListSerializer(serializers.ModelSerializer):
 
 class PositionsListSerializer(serializers.ModelSerializer):
     """Serializers positions"""
+
     class Meta:
         """All fields positions"""
         model = Positions
@@ -29,6 +32,7 @@ class PositionsListSerializer(serializers.ModelSerializer):
 
 class SpecializationListSerializer(serializers.ModelSerializer):
     """Serializers specialization"""
+
     class Meta:
         """All fields specialization"""
         model = Specialization
