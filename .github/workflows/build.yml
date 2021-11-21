@@ -13,7 +13,7 @@ jobs:
     env:
       DB_DATABASE: test_db
       DB_USER: root
-      DB_PASSWORD: root
+      DB_PASSWORD: YES
 
     steps:
       - uses: actions/checkout@v2
@@ -35,7 +35,7 @@ jobs:
 #        with:
 #          mysql user: 'developer'
 #          mysql password: 'root'
-      
+
       - name: Analysing the code with pylint
         run: |
           pylint --load-plugins=pylint_django --django-settings-module=department.settings department/department_app/
