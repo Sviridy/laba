@@ -10,18 +10,18 @@ jobs:
     strategy:
           matrix:
             python-version: [3.6, 3.7, 3.8, 3.9]
-    services:
-      mysql:
-        image: mysql:latest
-        env:
-          MYSQL_DATABASE: test_database
-          MYSQL_HOST: 127.0.0.1
-          MYSQL_USER: admin
-          MYSQL_PASSWORD: rootpass
-          MYSQL_ROOT_PASSWORD: rootpass
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+#    services:
+#      mysql:
+#        image: mysql:latest
+#        env:
+#          MYSQL_DATABASE: test_database
+#          MYSQL_HOST: 127.0.0.1
+#          MYSQL_USER: admin
+#          MYSQL_PASSWORD: rootpass
+#          MYSQL_ROOT_PASSWORD: rootpass
+#        ports:
+#          - 3306:3306
+#        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
@@ -53,7 +53,6 @@ jobs:
           pylint --load-plugins=pylint_django --django-settings-module=department.settings department/department_app/
       - name: Coveralls
         run: |
-          sudo service mysql start
           coverage run --source=department department/manage.py test department_app
           coveralls --service=github
 
