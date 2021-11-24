@@ -56,8 +56,8 @@ jobs:
       - name: Coveralls
         run: |
           sudo service mysql start
-          sudo client user=root
-          sudo client password=root
+          sudo user=root
+          sudo password=root
           coverage run --source=department department/manage.py test department_app
           coveralls --service=github
 
