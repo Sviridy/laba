@@ -1,9 +1,4 @@
 name: build
-#env:
-#  MYSQL_DATABASE: test_forest
-#  MYSQL_USER: test_user
-#  MYSQL_PASSWORD: password
-#  MYSQL_HOST: mysql-master
 
 on: [ "push", "pull_request" ]
 
@@ -15,38 +10,18 @@ jobs:
     strategy:
           matrix:
             python-version: [3.6, 3.7, 3.8, 3.9]
-#    env:
-#      DB_DATABASE: test_db
-#      DB_USER: root
-#      DB_PASSWORD: YES
 #    services:
-#      mysql-master:
-#        image: mysql:5.7
-#        ports:
-#          - 3306/tcp
+#      mysql:
+#        image: mysql:latest
 #        env:
-#          MYSQL_DATABASE: ${{ env.MYSQL_DATABASE }}
-#          MYSQL_USER: ${{ env.MYSQL_USER }}
-#          MYSQL_PASSWORD: ${{ env.MYSQL_PASSWORD }}
-#          MYSQL_ROOT_PASSWORD: ${{ env.MYSQL_PASSWORD }}
-#        options: >-
-#          --name=mysql-master
-#          --health-cmd="mysqladmin ping"
-#          --health-interval=10s
-#          --health-timeout=5s
-#          --health-retries=3
-    services:
-      mysql:
-        image: mysql:latest
-        env:
-          MYSQL_DATABASE: test_database
-          MYSQL_HOST: 127.0.0.1
-          MYSQL_USER: admin
-          MYSQL_PASSWORD: rootpass
-          MYSQL_ROOT_PASSWORD: rootpass
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+#          MYSQL_DATABASE: test_database
+#          MYSQL_HOST: 127.0.0.1
+#          MYSQL_USER: admin
+#          MYSQL_PASSWORD: rootpass
+#          MYSQL_ROOT_PASSWORD: rootpass
+#        ports:
+#          - 3306:3306
+#        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
@@ -58,31 +33,28 @@ jobs:
           python -m pip install --upgrade pip
           pip install coveralls pylint pylint-django
           pip install -r department/requirements.txt
-#      - name: Set up MySQL
-#        run: |
-#          sudo /etc/init.d/mysql start
-#          mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
-#      - name: Shutdown Ubuntu MySQL (SUDO)
-#        run: sudo service mysql stop
-#      - name: Set up MySQL
-#        uses: mirromutth/mysql-action@v1.1
-#        with:
-#          host port: 3800 # Optional, default value is 3306. The port of host
-#          container port: 3307 # Optional, default value is 3306. The port of container
-#          character set server: 'utf8' # Optional, default value is 'utf8mb4'. The '--character-set-server' option for mysqld
-#          collation server: 'utf8_general_ci' # Optional, default value is 'utf8mb4_general_ci'. The '--collation-server' option for mysqld
-#          mysql version: '8.0' # Optional, default value is "latest". The version of the MySQL
-#          mysql database: 'some_test' # Optional, default value is "test". The specified database which will be create
-#          mysql root password: ${{ secrets.RootPassword }} # Required if "mysql user" is empty, default is empty. The root superuser password
-#          mysql user: 'developer' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
-#          mysql password: 'root' # Required if "mysql user" exists. The password for the "mysql user"
+      - name: Shutdown Ubuntu MySQL (SUDO)
+        run: sudo service mysql stop
+      - name: Set up MySQL
+        uses: mirromutth/mysql-action@v1.1
+        with:
+          host port: 3800 # Optional, default value is 3306. The port of host
+          container port: 3307 # Optional, default value is 3306. The port of container
+          character set server: 'utf8' # Optional, default value is 'utf8mb4'. The '--character-set-server' option for mysqld
+          collation server: 'utf8_general_ci' # Optional, default value is 'utf8mb4_general_ci'. The '--collation-server' option for mysqld
+          mysql version: '8.0' # Optional, default value is "latest". The version of the MySQL
+          mysql database: 'some_test' # Optional, default value is "test". The specified database which will be create
+          mysql root password: 'root' # Required if "mysql user" is empty, default is empty. The root superuser password
+          mysql user: 'developer' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
+          mysql password: 'root' # Required if "mysql user" exists. The password for the "mysql user"
 
       - name: Analysing the code with pylint
         run: |
           pylint --load-plugins=pylint_django --django-settings-module=department.settings department/department_app/
       - name: Coveralls
         run: |
-          socket=/var/run/mysql/mysql.sock
+          sudo service mysql start
+#          socket=/var/run/mysql/mysql.sock
           coverage run --source=department department/manage.py test department_app
           coveralls --service=github
 
