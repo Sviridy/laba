@@ -43,8 +43,9 @@ jobs:
           mysql database: 'django' # Optional, default value is "test". The specified database which will be create
 #          mysql root password: 'john591998' # Required if "mysql user" is empty, default is empty. The root superuser password
           mysql user: 'root' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
-          mysql password: ${{secrets.DatabasePassword}} # Required if "mysql user" exists. The password for the "mysql user"
-
+          mysql password: 'john591998' # Required if "mysql user" exists. The password for the "mysql user"
+          mysql host: 'localhost'
+          
       - name: Analysing the code with pylint
         run: |
           pylint --load-plugins=pylint_django --django-settings-module=department.settings department/department_app/
