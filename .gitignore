@@ -5,3 +5,4 @@
 #department/setup.cfg
 */__pycache__/*
 *.pyc
+newenv
