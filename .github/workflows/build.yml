@@ -28,8 +28,8 @@ jobs:
           pip install -r department/requirements.txt
       - name: Set up MySQL
         run: |
-          sudo /etc/init.d/mysql status
           sudo /etc/init.d/mysql restart
+          sudo /etc/init.d/mysql status
           mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
 #      - name: Shutdown Ubuntu MySQL (SUDO)
 #        run: sudo service mysql stop
