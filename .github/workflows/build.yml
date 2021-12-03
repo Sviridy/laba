@@ -13,7 +13,7 @@ jobs:
     env:
       DB_DATABASE: django
       DB_USER: root
-      DB_PASSWORD: john591998
+      DB_PASSWORD: root
 
     steps:
       - uses: actions/checkout@v2
@@ -29,7 +29,6 @@ jobs:
       - name: Set up MySQL
         run: |
           sudo /etc/init.d/mysql restart
-          sudo /etc/init.d/mysql status
           mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
 #      - name: Shutdown Ubuntu MySQL (SUDO)
 #        run: sudo service mysql stop
