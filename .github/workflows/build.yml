@@ -13,15 +13,9 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE: your-db_dev
-        ports:
-          - 3306
-        options: >-
-          --health-cmd="mysqladmin ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
+          MYSQL_ROOT_PASSWORD: john591998
+          MYSQL_DATABASE: django
+        ports: [ '3306:3306' ]
 #    env:
 #      DB_DATABASE: django
 #      DB_USER: root
@@ -37,6 +31,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install coveralls pylint pylint-django
           pip install -r department/requirements.txt
+      - name: Run Migrations
+        run: python manage.py migrate
+        env:
+          DBENGINE: django.db.backends.mysql
+          DBNAME: django
+          DBUSER: root
+          DBPASSWORD: john591998
+          DBHOST: 127.0.0.1
+          DBPORT: $
 #      - name: Set up MySQL
 #        run: |
 #          sudo /etc/init.d/mysql restart
@@ -62,11 +65,14 @@ jobs:
           pylint --load-plugins=pylint_django --django-settings-module=department.settings department/department_app/
       - name: Coveralls
         run: |
-          sudo service mysql restart
           coverage run --source=department department/manage.py test department_app
           coveralls --service=github
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DB_PORT: 3306
-          RAILS_ENV: test
+          DBENGINE: django.db.backends.mysql
+          DBNAME: django
+          DBUSER: root
+          DBPASSWORD: john591998
+          DBHOST: 127.0.0.1
+          DBPORT: $
