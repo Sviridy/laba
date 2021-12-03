@@ -50,22 +50,28 @@ jobs:
 #          mysql root password: 'john591998' # Required if "mysql user" is empty, default is empty. The root superuser password
 #          mysql user: 'root' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
 ##          mysql password: 'john591998' # Required if "mysql user" exists. The password for the "mysql user"
-
+      - name: Run Migrations
+        run: python */manage.py migrate
+        env:
+          DBENGINE: django.db.backends.mysql
+          DBNAME: django
+          DBUSER: root
+          DBPASSWORD: john591998
+          DBHOST: 127.0.0.1
+          DBPORT: ${{ job.services.mysql.ports[3306] }}
       - name: Analysing the code with pylint
         run: |
           pylint --load-plugins=pylint_django --django-settings-module=department.settings department/department_app/
       - name: Coveralls
         run: |
-          journalctl -xe
-          sudo service mysql restart
           coverage run --source=department department/manage.py test department_app
           coveralls --service=github
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ENGINE: django.db.backends.mysql
-          NAME: django
-          USER: root
-          PASSWORD: john591998
-          HOST: 127.0.0.1
-          PORT: $
+          DBENGINE: django.db.backends.mysql
+          DBNAME: django
+          DBUSER: root
+          DBPASSWORD: john591998
+          DBHOST: 127.0.0.1
+          DBPORT: ${{ job.services.mysql.ports[3306] }}
