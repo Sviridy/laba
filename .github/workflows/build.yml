@@ -10,19 +10,10 @@ jobs:
     strategy:
           matrix:
             python-version: [3.6, 3.7, 3.8, 3.9]
-#    env:
-#      DB_DATABASE: django
-#      DB_USER: root
-#      DB_PASSWORD: john591998
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: john591998
-          MYSQL_DATABASE: django
-        ports:
-          - '8888:3306'
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    env:
+      DB_DATABASE: django
+      DB_USER: root
+      DB_PASSWORD: john591998
 
     steps:
       - uses: actions/checkout@v2
@@ -35,13 +26,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install coveralls pylint pylint-django
           pip install -r department/requirements.txt
-      - uses: actions/checkout@v1
-      - run: mysql -h 127.0.0.1 --port 8888 -u root -ppassword -e 'CREATE DATABASE IF NOT EXISTS django;'
-#      - name: Set up MySQL
-#        run: |
-#          sudo /etc/init.d/mysql restart
-#          sudo /etc/init.d/mysql status
-#          mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+      - name: Set up MySQL
+        run: |
+          sudo /etc/init.d/mysql restart
+          sudo /etc/init.d/mysql status
+          mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
 #      - name: Shutdown Ubuntu MySQL (SUDO)
 #        run: sudo service mysql stop
 #      - name: Set up MySQL
