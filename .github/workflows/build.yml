@@ -32,7 +32,7 @@ jobs:
           pip install coveralls pylint pylint-django
           pip install -r department/requirements.txt
       - name: Run Migrations
-        run: python manage.py migrate
+        run: python */manage.py migrate
         env:
           DBENGINE: django.db.backends.mysql
           DBNAME: django
