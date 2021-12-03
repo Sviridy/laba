@@ -1,0 +1,21 @@
+default: &default
+  adapter: mysql2
+  collation: utf8mb4_unicode_ci
+  encoding: utf8mb4
+
+development: &development
+  <<: *default
+  username: root
+  database: your-db_dev
+
+test:
+  <<: *development
+  database: your-db_test
+  <% if ENV['build'] %>
+  host: 127.0.0.1
+  port: <%= ENV['DB_PORT'] %>
+  <% end %>
+
+production: &production
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
