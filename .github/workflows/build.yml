@@ -61,9 +61,9 @@ jobs:
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DBENGINE: django.db.backends.mysql
-          DBNAME: django
-          DBUSER: root
-          DBPASSWORD: john591998
-          DBHOST: 127.0.0.1
-          DBPORT: $
+          ENGINE: django.db.backends.mysql
+          NAME: django
+          USER: root
+          PASSWORD: john591998
+          HOST: 127.0.0.1
+          PORT: $
