@@ -56,6 +56,7 @@ jobs:
           pylint --load-plugins=pylint_django --django-settings-module=department.settings department/department_app/
       - name: Coveralls
         run: |
+          systemctl status mysql.service
           sudo service mysql restart
           coverage run --source=department department/manage.py test department_app
           coveralls --service=github
