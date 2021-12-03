@@ -11,7 +11,7 @@ development: &development
 test:
   <<: *development
   database: your-db_test
-  <% if ENV['build'] %>
+  <% if ENV['CI'] %>
   host: 127.0.0.1
   port: <%= ENV['DB_PORT'] %>
   <% end %>
