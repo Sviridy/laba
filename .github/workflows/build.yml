@@ -57,6 +57,7 @@ jobs:
       - name: Coveralls
         run: |
           systemctl status mysql.service
+          journalctl -xe
           sudo service mysql restart
           coverage run --source=department department/manage.py test department_app
           coveralls --service=github
