@@ -43,3 +43,6 @@ jobs:
           coveralls --service=github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DBENGINE: django.db.backends.mysql
+          DBUSER: root
+          DBHOST: 127.0.0.1
