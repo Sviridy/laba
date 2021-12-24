@@ -13,6 +13,7 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: john591998
           MYSQL_DATABASE: django
+          DBHOST: 127.0.0.1
         ports: [ '3306:3306' ]
     steps:
       - uses: actions/checkout@v2
