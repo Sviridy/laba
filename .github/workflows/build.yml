@@ -25,17 +25,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install coveralls pylint pylint-django
           pip install -r department/requirements.txt
-      - name: Run Migrations
-        run: python */manage.py migrate
-        env:
-          DBENGINE: django.db.backends.mysql
-          DBUSER: root
-          DBHOST: 127.0.0.1
       - name: Analysing the code with pylint
         run: |
           pylint --load-plugins=pylint_django --django-settings-module=department.settings department/department_app/
-      - name: Coveralls
+      - name: Run Migrations and Coveralls
         run: |
+          python */manage.py migrate
           coverage run --source=department department/manage.py test department_app
           coveralls --service=github
         env:
