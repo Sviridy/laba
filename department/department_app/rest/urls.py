@@ -1,5 +1,4 @@
 """Urls"""
-from django.urls import path
 from department_app.views import DepartmentViewSet, EmployeeViewSet, PositionsViewSet, SpecializationViewSet
 from rest_framework.routers import DefaultRouter
 

@@ -1,21 +1,38 @@
 """Views specialization"""
-from rest_framework import generics
 from department_app.rest.serializers import SpecializationListSerializer
 from department_app.models import Specialization
+from rest_framework import viewsets
 
 
-class SpecializationCreateView(generics.CreateAPIView):
-    """Create specialization"""
-    serializer_class = SpecializationListSerializer
-
-
-class SpecializationListView(generics.ListAPIView):
-    """Read all specialization"""
-    serializer_class = SpecializationListSerializer
+class SpecializationViewSet(viewsets.ModelViewSet):
+    """"Create, read, update, delete"""
     queryset = Specialization.objects.all()
-
-
-class SpecializationDetailView(generics.RetrieveUpdateDestroyAPIView):
-    """Read, update, delete"""
     serializer_class = SpecializationListSerializer
-    queryset = Specialization.objects.all()
+
+
+# class SpecializationHome(ListView):
+#     model = Specialization
+#     template_name = 'specialization.html'
+#     context_object_name = 'specialization'
+#
+#
+# class EditSpecialization(UpdateView):
+#     model = Specialization
+#     fields = ['name']
+#     template_name = 'edit_specialization.html'
+#     pk_url_kwarg = 'specialization_id'
+#     context_object_name = 'specialization'
+#     success_url = reverse_lazy('specialization')
+#
+#
+# class AddSpecialization(CreateView):
+#     model = Specialization
+#     fields = ['name']
+#     template_name = 'add_specialization.html'
+#     context_object_name = 'specialization'
+#     success_url = reverse_lazy('specialization')
+#
+#
+# def delete_specialization(request, specialization_id):
+#     Specialization.objects.get(id=specialization_id).delete()
+#     return HttpResponseRedirect("/specialization/")
