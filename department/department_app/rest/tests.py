@@ -25,7 +25,7 @@ class DepartmentTests(APITestCase):
         """Test list department"""
         response = self.client.get(reverse('department-list'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.json()[-1].get('department'), 'Developer')
+        self.assertEqual(response.json()[-1].get('department'), 'Marketing')
 
     def test_create_department(self):
         """Test create department"""
