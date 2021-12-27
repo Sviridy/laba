@@ -1,10 +1,10 @@
 """Views positions"""
 from department_app.rest.serializers import PositionsListSerializer
 from department_app.models import Positions
-from rest_framework import viewsets
+from rest_framework.viewsets import ModelViewSet
 
 
-class PositionsViewSet(viewsets.ModelViewSet):
+class PositionsViewSet(ModelViewSet):
     """"Create, read, update, delete"""
     queryset = Positions.objects.all()
     serializer_class = PositionsListSerializer

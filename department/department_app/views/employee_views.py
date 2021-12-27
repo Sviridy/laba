@@ -1,10 +1,10 @@
 """Views employee"""
 from department_app.rest.serializers import EmployeeListSerializer
 from department_app.models import Employee
-from rest_framework import viewsets
+from rest_framework.viewsets import ModelViewSet
 
 
-class EmployeeViewSet(viewsets.ModelViewSet):
+class EmployeeViewSet(ModelViewSet):
     """"Create, read, update, delete"""
     queryset = Employee.objects.all()
     serializer_class = EmployeeListSerializer

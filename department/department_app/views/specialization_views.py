@@ -1,10 +1,10 @@
 """Views specialization"""
 from department_app.rest.serializers import SpecializationListSerializer
 from department_app.models import Specialization
-from rest_framework import viewsets
+from rest_framework.viewsets import ModelViewSet
 
 
-class SpecializationViewSet(viewsets.ModelViewSet):
+class SpecializationViewSet(ModelViewSet):
     """"Create, read, update, delete"""
     queryset = Specialization.objects.all()
     serializer_class = SpecializationListSerializer
