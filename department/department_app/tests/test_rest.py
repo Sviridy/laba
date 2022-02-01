@@ -22,12 +22,6 @@ class DepartmentTests(APITestCase):
                                                  specialization=self.specialization,
                                                  experience=10, wages=2000)
 
-    def test_list_department(self):
-        """Test list department"""
-        response = self.client.get(reverse('department-list'))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.json()[-1].get('department'), 'Marketing')
-
     def test_create_department(self):
         """Test create department"""
         url = reverse('department-list')
@@ -35,3 +29,9 @@ class DepartmentTests(APITestCase):
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.json().get('department'), 'hi')
+
+    def test_list_department(self):
+        """Test list department"""
+        response = self.client.get(reverse('department-list'))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.json()[-1].get('department'), 'Marketing')
