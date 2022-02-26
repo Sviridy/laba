@@ -5,3 +5,6 @@
 #department/setup.cfg
 */__pycache__/*
 *.pyc
+newenv
+myprojectenv
+department/static

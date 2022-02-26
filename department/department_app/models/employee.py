@@ -1,10 +1,9 @@
 """Employee"""
 from django.db import models
-# from department_app.models import Department, Positions, Specialization
-from .departmentt import Department
-from .specialization import Specialization
-from .positions import Positions
-
+from department_app.models import Department, Positions, Specialization
+# from .departmentt import Department
+# from .specialization import Specialization
+# from .positions import Positions
 
 
 class Employee(models.Model):
